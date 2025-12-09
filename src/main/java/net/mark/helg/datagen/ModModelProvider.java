@@ -1,14 +1,15 @@
 package net.mark.helg.datagen;
 
-import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.mark.helg.block.ModBlocks;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.mark.helg.Helg;
 import net.mark.helg.item.ModArmorMaterials;
 import net.mark.helg.item.ModItems;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.Model;
-import net.minecraft.client.data.Models;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Model;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
@@ -27,13 +28,17 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        /*itemModelGenerator.register(ModItems.HELG_SHARD, Models.GENERATED);
-        itemModelGenerator.register(ModItems.HELG_INGOT, Models.GENERATED);
+        //itemModelGenerator.register(ModItems.HELG_SHARD, Models.GENERATED);
+        //itemModelGenerator.register(ModItems.HELG_INGOT, Models.GENERATED);
 
-        itemModelGenerator.registerArmor( ModItems.HELGERITE_HELMET, ModArmorMaterials.HELGERITE_KEY, ItemModelGenerator.HELMET_TRIM_ID_PREFIX, false);
-        itemModelGenerator.registerArmor( ModItems.HELGERITE_CHESTPLATE, ModArmorMaterials.HELGERITE_KEY, ItemModelGenerator.CHESTPLATE_TRIM_ID_PREFIX, false);
-        itemModelGenerator.registerArmor( ModItems.HELGERITE_LEGGINGS, ModArmorMaterials.HELGERITE_KEY, ItemModelGenerator.LEGGINGS_TRIM_ID_PREFIX, false);
-        itemModelGenerator.registerArmor( ModItems.HELGERITE_BOOTS, ModArmorMaterials.HELGERITE_KEY, ItemModelGenerator.BOOTS_TRIM_ID_PREFIX, false);
+        /*itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_HELMET), Identifier.of(Helg.MOD_ID, "helgerite_helmet"),
+                ModArmorMaterials.HELGERITE, EquipmentSlot.HEAD);
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_CHESTPLATE), Identifier.of(Helg.MOD_ID, "helgerite_chestplate"),
+                ModArmorMaterials.HELGERITE, EquipmentSlot.CHEST);
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_LEGGINGS), Identifier.of(Helg.MOD_ID, "helgerite_leggings"),
+                ModArmorMaterials.HELGERITE, EquipmentSlot.LEGS);
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_BOOTS), Identifier.of(Helg.MOD_ID, "helgerite_boots"),
+                ModArmorMaterials.HELGERITE, EquipmentSlot.FEET);
 
         itemModelGenerator.register(ModItems.HELGERITE_SPAWN_EGG,
                 new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));*/

@@ -2,12 +2,12 @@ package net.mark.helg.entity.custom.goal;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +44,7 @@ public class ArmorTemptGoal extends Goal {
             --this.cooldown;
             return false;
         }
-        //this.closestPlayer = this.mob.getWorld().getClosestPlayer(closestPlayer, 16);
+        this.closestPlayer = this.mob.getWorld().getClosestPlayer(closestPlayer, 16);
         return this.closestPlayer != null;
     }
 
@@ -67,7 +67,7 @@ public class ArmorTemptGoal extends Goal {
     public void stop() {
         this.closestPlayer = null;
         this.mob.getNavigation().stop();
-        this.cooldown = Goal.toGoalTicks(100);
+        this.cooldown = net.minecraft.entity.ai.goal.TemptGoal.toGoalTicks(100);
         this.active = false;
     }
 
@@ -91,29 +91,34 @@ public class ArmorTemptGoal extends Goal {
             return false;
         }
 
-        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
+        ItemStack boots = player.getInventory().getArmorStack(0);
+        ItemStack leggings = player.getInventory().getArmorStack(1);
+        ItemStack breastplate = player.getInventory().getArmorStack(2);
+        ItemStack helmet = player.getInventory().getArmorStack(3);
 
-        return !helmet.isEmpty() && !chestplate.isEmpty()
+        return !helmet.isEmpty() && !breastplate.isEmpty()
                 && !leggings.isEmpty() && !boots.isEmpty();
     }
 
     private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
+        for (ItemStack armorStack: player.getInventory().armor) {
+            if(!(armorStack.getItem() instanceof ArmorItem)) {
+                return false;
+            }
+        }
 
-        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
+        ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
+        ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
+        ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
+        ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
 
         EquippableComponent equippableComponentBoots = boots.getComponents().get(DataComponentTypes.EQUIPPABLE);
         EquippableComponent equippableComponentLeggings = leggings.getComponents().get(DataComponentTypes.EQUIPPABLE);
-        EquippableComponent equippableComponentBreastplate = chestplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
+        EquippableComponent equippableComponentBreastplate = breastplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
         EquippableComponent equippableComponentHelmet = helmet.getComponents().get(DataComponentTypes.EQUIPPABLE);
 
-        return equippableComponentBoots.assetId().get().equals(material) && equippableComponentLeggings.assetId().get().equals(material) &&
-                equippableComponentBreastplate.assetId().get().equals(material) && equippableComponentHelmet.assetId().get().equals(material);
+        return equippableComponentBoots.model().get().equals(material) && equippableComponentLeggings.model().get().equals(material) &&
+                equippableComponentBreastplate.model().get().equals(material) && equippableComponentHelmet.model().get().equals(material);
     }
 
 }
