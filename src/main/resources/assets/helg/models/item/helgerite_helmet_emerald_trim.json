@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "helg:item/helgerite_helmet",
+    "layer1": "minecraft:trims/items/helmet_trim_emerald"
+  }
+}

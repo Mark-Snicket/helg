@@ -1,0 +1,17 @@
+{
+  "item.helg.helg_shard": "Helg Shard",
+  "item.helg.helg_ingot": "Helg Ingot",
+
+  "item.helg.helgerite_helmet": "Helgerite Helmet",
+  "item.helg.helgerite_chestplate": "Helgerite Chestplate",
+  "item.helg.helgerite_leggings": "Helgerite Leggings",
+  "item.helg.helgerite_boots": "Helgerite Boots",
+
+  "item.helg.helgerite_spawn_egg": "Helgerite Spawn Egg",
+
+
+  "block.helg.helg_ore": "Helg Ore",
+  "block.helg.helg_block": "Block of Helg",
+
+  "entity.helg.helgerite": "Helgerite"
+}

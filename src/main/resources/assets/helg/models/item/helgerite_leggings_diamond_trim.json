@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "helg:item/helgerite_leggings",
+    "layer1": "minecraft:trims/items/leggings_trim_diamond"
+  }
+}

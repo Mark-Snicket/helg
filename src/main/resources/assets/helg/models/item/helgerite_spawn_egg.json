@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "helg:item/helgerite_spawn_egg"
+  }
+}

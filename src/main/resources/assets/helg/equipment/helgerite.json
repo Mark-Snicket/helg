@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "helg:helgerite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "helg:helgerite"
+      }
+    ]
+  }
+}
