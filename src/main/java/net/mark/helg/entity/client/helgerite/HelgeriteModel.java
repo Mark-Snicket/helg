@@ -3,7 +3,6 @@ package net.mark.helg.entity.client.helgerite;
 import net.mark.helg.Helg;
 import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
@@ -13,15 +12,10 @@ public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
     public static final EntityModelLayer HELGERITE = new EntityModelLayer(Identifier.of(Helg.MOD_ID, "helgerite"), "main");
 
     private final ModelPart helgerite;
-    private final Animation flyingAnimation;
-    private final Animation idlingAnimation;
 
     public HelgeriteModel(ModelPart root) {
         super(root);
         this.helgerite = root.getChild("helgerite");
-
-        this.flyingAnimation = HelgeriteAnimations.IDLE.createAnimation(root);
-        this.idlingAnimation = HelgeriteAnimations.IDLE.createAnimation(root);
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -45,8 +39,8 @@ public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
         super.setAngles(state);
         this.setHeadAngles(state.relativeHeadYaw);
 
-        this.flyingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2.0f, 2.5f);
-        this.idlingAnimation.apply(state.idleAnimationState, state.age, 1.0f);
+        this.animateWalking(HelgeriteAnimations.IDLE, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2.0f, 2.5f);
+        this.animate(state.idleAnimationState, HelgeriteAnimations.IDLE, state.age, 1.0f);
     }
 
     private void setHeadAngles(float headYaw) {
