@@ -2,61 +2,61 @@ package net.mark.helg.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.mark.helg.Helg;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import java.util.function.Function;
 
 public class ModBlocks {
 
     public static final Block HELG_ORE = registerBlock("helg_ore",
-            properties -> new DropExperienceBlock(UniformInt.of(2,5), properties
+            properties -> new ExperienceDroppingBlock(UniformIntProvider.create(2,5),properties
                     .strength(1f)
-                    .explosionResistance(1f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.ROOTED_DIRT)));
+                    .resistance(1f)
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.ROOTED_DIRT)));
 
     public static final Block HELG_BLOCK = registerBlock("helg_block",
             properties -> new Block(properties
                     .strength(5f)
-                    .explosionResistance(5f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.GRAVEL)));
+                    .resistance(5f)
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.GRAVEL)));
 
 
 
 
-    private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
-        Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Helg.MOD_ID, name))));
+    private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> function) {
+        Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Helg.MOD_ID, name))));
         registerBlockItem(name, toRegister);
-        return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(Helg.MOD_ID, name), toRegister);
+        return Registry.register(Registries.BLOCK, Identifier.of(Helg.MOD_ID, name), toRegister);
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(Helg.MOD_ID, name),
-                new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix()
-                        .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Helg.MOD_ID, name)))));
+        Registry.register(Registries.ITEM, Identifier.of(Helg.MOD_ID, name),
+                new BlockItem(block, new Item.Settings().useBlockPrefixedTranslationKey()
+                        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Helg.MOD_ID, name)))));
     }
 
 
     public static void registerModBlocks() {
-    ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
-        entries.accept(ModBlocks.HELG_ORE);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.add(ModBlocks.HELG_ORE);
         });
 
-    ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
-        entries.accept(ModBlocks.HELG_BLOCK);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
+            entries.add(ModBlocks.HELG_BLOCK);
         });
     }
 }

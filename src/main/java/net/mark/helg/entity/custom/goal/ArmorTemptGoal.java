@@ -1,16 +1,15 @@
 package net.mark.helg.entity.custom.goal;
 
-
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.EquippableComponent;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
@@ -18,29 +17,29 @@ import java.util.EnumSet;
 
 
 public class ArmorTemptGoal extends Goal {
-    private static final TargetingConditions TEMPTING_ENTITY_PREDICATE = TargetingConditions.forNonCombat().range(10.0).ignoreLineOfSight();
-    private final TargetingConditions predicate;
-    protected final PathfinderMob mob;
+    private static final TargetPredicate TEMPTING_ENTITY_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility();
+    private final TargetPredicate predicate;
+    protected final PathAwareEntity mob;
     private final double speed;
     private double lastPlayerX;
     private double lastPlayerY;
     private double lastPlayerZ;
     @Nullable
-    protected Player closestPlayer;
+    protected PlayerEntity closestPlayer;
     private int cooldown;
     private boolean active;
     private final ArmorMaterial material;
 
-    public ArmorTemptGoal(PathfinderMob entity, double speed, ArmorMaterial material) {
+    public ArmorTemptGoal(PathAwareEntity entity, double speed, ArmorMaterial material) {
         this.mob = entity;
         this.speed = speed;
         this.material = material;
-        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().selector((TargetingConditions.Selector) this.closestPlayer);
+        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate((TargetPredicate.EntityPredicate) this.closestPlayer);
     }
 
     @Override
-    public boolean canUse() {
+    public boolean canStart() {
         if (this.cooldown > 0) {
             --this.cooldown;
             return false;
@@ -55,30 +54,30 @@ public class ArmorTemptGoal extends Goal {
     }
 
     @Override
-    public boolean canContinueToUse() {
-        return this.canUse();
+    public boolean shouldContinue() {
+        return this.canStart();
     }
 
     @Override
     public void start() {
-            this.active = true;
+        this.active = true;
     }
 
     @Override
     public void stop() {
         this.closestPlayer = null;
         this.mob.getNavigation().stop();
-        this.cooldown = Goal.reducedTickDelay(100);
+        this.cooldown = Goal.toGoalTicks(100);
         this.active = false;
     }
 
     @Override
     public void tick() {
-        this.mob.getLookControl().setLookAt(this.closestPlayer, this.mob.getMaxHeadYRot() + 20, this.mob.getMaxHeadXRot());
-        if (this.mob.distanceToSqr(this.closestPlayer) < 6.25) {
+        this.mob.getLookControl().lookAt(this.closestPlayer, this.mob.getMaxHeadRotation() + 20, this.mob.getMaxLookPitchChange());
+        if (this.mob.squaredDistanceTo(this.closestPlayer) < 6.25) {
             this.mob.getNavigation().stop();
         } else {
-            this.mob.getNavigation().moveTo(this.closestPlayer, this.speed);
+            this.mob.getNavigation().startMovingTo(this.closestPlayer, this.speed);
         }
     }
 
@@ -86,35 +85,35 @@ public class ArmorTemptGoal extends Goal {
         return this.active;
     }
 
-    private boolean hasFullSuitOfArmorOn(Player player) {
+    private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
 
         if (player == null) {
             return false;
         }
 
-        ItemStack boots = player.getInventory().getItem(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getItem(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getItem(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getItem(EquipmentSlot.HEAD.getIndex());
+        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
+        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
+        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
+        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
 
         return !helmet.isEmpty() && !chestplate.isEmpty()
                 && !leggings.isEmpty() && !boots.isEmpty();
     }
 
-    private boolean hasCorrectArmorOn(ArmorMaterial material, Player player) {
+    private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
 
-        ItemStack boots = player.getInventory().getItem(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getItem(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getItem(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getItem(EquipmentSlot.HEAD.getIndex());
+        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
+        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
+        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
+        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
 
-        Equippable equippableBoots = boots.getComponents().get(DataComponents.EQUIPPABLE);
-        Equippable equippableLeggings = leggings.getComponents().get(DataComponents.EQUIPPABLE);
-        Equippable equippableBreastplate = chestplate.getComponents().get(DataComponents.EQUIPPABLE);
-        Equippable equippableHelmet = helmet.getComponents().get(DataComponents.EQUIPPABLE);
+        EquippableComponent equippableComponentBoots = boots.getComponents().get(DataComponentTypes.EQUIPPABLE);
+        EquippableComponent equippableComponentLeggings = leggings.getComponents().get(DataComponentTypes.EQUIPPABLE);
+        EquippableComponent equippableComponentBreastplate = chestplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
+        EquippableComponent equippableComponentHelmet = helmet.getComponents().get(DataComponentTypes.EQUIPPABLE);
 
-        return equippableBoots.assetId().get().equals(material) && equippableLeggings.assetId().get().equals(material) &&
-                equippableBreastplate.assetId().get().equals(material) && equippableHelmet.assetId().get().equals(material);
+        return equippableComponentBoots.assetId().get().equals(material) && equippableComponentLeggings.assetId().get().equals(material) &&
+                equippableComponentBreastplate.assetId().get().equals(material) && equippableComponentHelmet.assetId().get().equals(material);
     }
 
 }

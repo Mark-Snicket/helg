@@ -1,58 +1,57 @@
 package net.mark.helg.entity.client.helgerite;
 
 import net.mark.helg.Helg;
-import net.minecraft.client.animation.KeyframeAnimation;
+import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
-    public static final ModelLayerLocation HELGERITE = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Helg.MOD_ID, "helgerite"), "main");
+    public static final EntityModelLayer HELGERITE = new EntityModelLayer(Identifier.of(Helg.MOD_ID, "helgerite"), "main");
 
     private final ModelPart helgerite;
-    private final KeyframeAnimation flyingAnimation;
-    private final KeyframeAnimation idlingAnimation;
+    private final Animation flyingAnimation;
+    private final Animation idlingAnimation;
 
     public HelgeriteModel(ModelPart root) {
         super(root);
         this.helgerite = root.getChild("helgerite");
 
-        this.flyingAnimation = HelgeriteAnimations.IDLE.bake(root);
-        this.idlingAnimation = HelgeriteAnimations.IDLE.bake(root);
+        this.flyingAnimation = HelgeriteAnimations.IDLE.createAnimation(root);
+        this.idlingAnimation = HelgeriteAnimations.IDLE.createAnimation(root);
     }
 
-    public static LayerDefinition getTexturedModelData() {
-        MeshDefinition meshDefinition = new MeshDefinition();
-        PartDefinition PartDefinition = meshDefinition.getRoot();
-        PartDefinition helgerite = PartDefinition.addOrReplaceChild("helgerite", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+    public static TexturedModelData getTexturedModelData() {
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+        ModelPartData helgerite = modelPartData.addChild("helgerite", ModelPartBuilder.create(), ModelTransform.origin(0.0F, 24.0F, 0.0F));
 
-        PartDefinition wing2 = helgerite.addOrReplaceChild("wing2", CubeListBuilder.create(), PartPose.offset(1.0F, -1.0F, 0.0F));
+        ModelPartData wing2 = helgerite.addChild("wing2", ModelPartBuilder.create(), ModelTransform.origin(1.0F, -1.0F, 0.0F));
 
-        PartDefinition wing2_r1 = wing2.addOrReplaceChild("wing2_r1", CubeListBuilder.create().texOffs(-4, 0).addBox(-0.05F, -4.0F, -3.0F, 0.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.7071F, -0.7071F, 0.0F, 0.0F, 0.0F, 0.7854F));
+        ModelPartData wing2_r1 = wing2.addChild("wing2_r1", ModelPartBuilder.create().uv(-4, 0).cuboid(-0.05F, -4.0F, -3.0F, 0.0F, 5.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(0.7071F, -0.7071F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-        PartDefinition wing1 = helgerite.addOrReplaceChild("wing1", CubeListBuilder.create(), PartPose.offset(-1.0F, -1.0F, 0.0F));
+        ModelPartData wing1 = helgerite.addChild("wing1", ModelPartBuilder.create(), ModelTransform.origin(-1.0F, -1.0F, 0.0F));
 
-        PartDefinition wing1_r1 = wing1.addOrReplaceChild("wing1_r1", CubeListBuilder.create().texOffs(-4, 0).addBox(0.05F, -4.0F, -3.0F, 0.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.7071F, -0.7071F, 0.0F, 0.0F, 0.0F, -0.7854F));
+        ModelPartData wing1_r1 = wing1.addChild("wing1_r1", ModelPartBuilder.create().uv(-4, 0).cuboid(0.05F, -4.0F, -3.0F, 0.0F, 5.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(-0.7071F, -0.7071F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
-        PartDefinition body = helgerite.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.075F)), PartPose.offset(0.0F, -1.0F, 0.0F));
-        return LayerDefinition.create(meshDefinition, 16, 16);
+        ModelPartData body = helgerite.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new Dilation(0.075F)), ModelTransform.origin(0.0F, -1.0F, 0.0F));
+        return TexturedModelData.of(modelData, 16, 16);
     }
     @Override
-    public void setupAnim(HelgeriteRenderState state) {
-        super.setupAnim(state);
-        this.setHeadAngles(state.yRot);
+    public void setAngles(HelgeriteRenderState state) {
+        super.setAngles(state);
+        this.setHeadAngles(state.relativeHeadYaw);
 
-        this.flyingAnimation.applyWalk(state.walkAnimationPos, state.walkAnimationSpeed, 2.0f, 2.5f);
-        this.idlingAnimation.apply(state.idleAnimationState, state.ageScale, 1.0f);
+        this.flyingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2.0f, 2.5f);
+        this.idlingAnimation.apply(state.idleAnimationState, state.age, 1.0f);
     }
 
     private void setHeadAngles(float headYaw) {
-        headYaw = Mth.clamp(headYaw, -30.0f, 30.0f);
+        headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);
 
-        this.helgerite.yRot = headYaw * 0.017453292f;
+        this.helgerite.yaw = headYaw * 0.017453292f;
     }
 }
