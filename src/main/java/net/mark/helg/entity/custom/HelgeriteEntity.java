@@ -15,14 +15,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,24 +40,19 @@ public class HelgeriteEntity extends AnimalEntity {
         this.goalSelector.add(0, new FlyGoal(this, 3.0d));
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        //this.goalSelector.add(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELGERITE_ARMOR_MATERIAL));
+        // this.goalSelector.add(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELGERITE_ARMOR_MATERIAL));
         this.goalSelector.add(2, new TemptGoal(this, 1.33d, Ingredient.ofItems(ModBlocks.HELG_BLOCK), false));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0d));
+        //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         //this.goalSelector.add(5, new LookAroundGoal(this));
 
     }
 
     @Override
     protected EntityNavigation createNavigation(World world) {
-        BirdNavigation birdNavigation = new BirdNavigation(this, world) {
-            public boolean isValidPosition(BlockPos pos) {
-                return !this.world.getBlockState(pos.down()).isAir();
-            }
-        };
-        birdNavigation.setCanOpenDoors(false);
+        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+        birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(true);
-        birdNavigation.setMaxFollowRange(48.0F);
         return birdNavigation;
     }
 
