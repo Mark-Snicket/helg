@@ -1,11 +1,14 @@
 package net.mark.helg.entity.client.helgerite;
 
-import net.minecraft.client.render.entity.animation.*;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
+import net.minecraft.client.render.entity.animation.Keyframe;
+import net.minecraft.client.render.entity.animation.Transformation;
 
 public class HelgeriteAnimations {
 
 
-	public static final AnimationDefinition IDLE = AnimationDefinition.Builder.create(12f).looping()
+	public static final Animation IDLE = Animation.Builder.create(12f).looping()
 			.addBoneAnimation("wing2",
 					new Transformation(Transformation.Targets.MOVE_ORIGIN,
 							new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
