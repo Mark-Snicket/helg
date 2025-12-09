@@ -87,11 +87,9 @@ public class HelgeriteEntity extends AnimalEntity {
     public void tick() {
         super.tick();
 
-        if (this.getEntityWorld().isClient()) {
+        if (this.getWorld().isClient()) {
             this.setupAnimationStates();
         }
-
-
     }
 
     @Override

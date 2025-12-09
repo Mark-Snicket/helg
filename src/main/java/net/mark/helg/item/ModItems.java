@@ -33,10 +33,8 @@ public class ModItems {
     public static final Item HELGERITE_BOOTS = registerItem("helgerite_boots",
             settings -> new Item(settings.armor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.BOOTS)));
 
-
-
     public static final Item HELGERITE_SPAWN_EGG = registerItem("helgerite_spawn_egg",
-            settings -> new SpawnEggItem(settings.spawnEgg(ModEntities.HELGERITE)));
+            settings -> new SpawnEggItem(ModEntities.HELGERITE, settings));
 
 
 
