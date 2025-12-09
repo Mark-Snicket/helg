@@ -2,18 +2,21 @@ package net.mark.helg.entity.client.helgerite;
 
 import net.mark.helg.Helg;
 import net.mark.helg.entity.custom.HelgeriteEntity;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.Identifier;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 
-public class HelgeriteRenderer extends MobRenderer<HelgeriteEntity, HelgeriteRenderState, HelgeriteModel> {
-    public HelgeriteRenderer(EntityRendererProvider.Context context) {
-        super(context, new HelgeriteModel(context.bakeLayer(HelgeriteModel.HELGERITE)), 0.1f);
+public class HelgeriteRenderer extends MobEntityRenderer<HelgeriteEntity, HelgeriteRenderState, HelgeriteModel> {
+    public HelgeriteRenderer(EntityRendererFactory.Context context) {
+        super(context, new HelgeriteModel(context.getPart(HelgeriteModel.HELGERITE)), 0.1f);
     }
 
     @Override
-    public Identifier getTextureLocation(HelgeriteRenderState state) {
-        return Identifier.fromNamespaceAndPath(Helg.MOD_ID, "textures/entity/helgerite/helgerite.png");
+    public Identifier getTexture(HelgeriteRenderState state) {
+        return Identifier.of(Helg.MOD_ID, "textures/entity/helgerite/helgerite.png");
     }
 
     @Override
@@ -22,8 +25,8 @@ public class HelgeriteRenderer extends MobRenderer<HelgeriteEntity, HelgeriteRen
     }
 
     @Override
-    public void extractRenderState(HelgeriteEntity livingEntity, HelgeriteRenderState livingEntityRenderState, float f) {
-        super.extractRenderState(livingEntity, livingEntityRenderState, f);
+    public void updateRenderState(HelgeriteEntity livingEntity, HelgeriteRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
     }
 }

@@ -2,37 +2,34 @@ package net.mark.helg.world;
 
 import net.mark.helg.Helg;
 import net.mark.helg.block.ModBlocks;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 
 public class ModConfiguredFeatures {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HELG_ORE_KEY = registerKey("helg_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> HELG_ORE_KEY = registerKey("helg_ore");
 
 
-    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
+
 
         register(context, HELG_ORE_KEY, Feature.RANDOM_PATCH,
-                FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HELG_ORE))));
+                ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.HELG_ORE))));
 
 
     }
 
-    public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(Helg.MOD_ID, name));
+    public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(Helg.MOD_ID, name));
     }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context,
-                                                                                          ResourceKey<ConfiguredFeature<?, ?>> Key, F feature, FC configuration) {
+    private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<ConfiguredFeature<?, ?>> context,
+                                                                                   RegistryKey<ConfiguredFeature<?, ?>> Key, F feature, FC configuration) {
         context.register(Key, new ConfiguredFeature<>(feature, configuration));
     }
 }
