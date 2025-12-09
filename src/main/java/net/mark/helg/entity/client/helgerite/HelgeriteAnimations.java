@@ -10,7 +10,7 @@ public class HelgeriteAnimations {
 
 	public static final Animation IDLE = Animation.Builder.create(12f).looping()
 			.addBoneAnimation("wing2",
-					new Transformation(Transformation.Targets.MOVE_ORIGIN,
+					new Transformation(Transformation.Targets.TRANSLATE,
 							new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
 									Transformation.Interpolations.CUBIC),
 							new Keyframe(3f, AnimationHelper.createTranslationalVector(0f, 1f, 0f),
@@ -102,7 +102,7 @@ public class HelgeriteAnimations {
 							new Keyframe(11.91667f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
 									Transformation.Interpolations.CUBIC)))
 			.addBoneAnimation("wing1",
-					new Transformation(Transformation.Targets.MOVE_ORIGIN,
+					new Transformation(Transformation.Targets.TRANSLATE,
 							new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
 									Transformation.Interpolations.CUBIC),
 							new Keyframe(3f, AnimationHelper.createTranslationalVector(0f, 1f, 0f),
@@ -194,7 +194,7 @@ public class HelgeriteAnimations {
 							new Keyframe(11.91667f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
 									Transformation.Interpolations.CUBIC)))
 			.addBoneAnimation("body",
-					new Transformation(Transformation.Targets.MOVE_ORIGIN,
+					new Transformation(Transformation.Targets.TRANSLATE,
 							new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
 									Transformation.Interpolations.CUBIC),
 							new Keyframe(3f, AnimationHelper.createTranslationalVector(0f, 1f, 0f),

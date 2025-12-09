@@ -3,6 +3,8 @@ package net.mark.helg.item;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.mark.helg.Helg;
 import net.mark.helg.entity.ModEntities;
+import net.mark.helg.item.costum.ModArmorItem;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.SpawnEggItem;
@@ -22,16 +24,20 @@ public class ModItems {
 
 
     public static final Item HELGERITE_HELMET = registerItem("helgerite_helmet",
-            settings -> new Item(settings.armor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.HELMET)));
+            settings -> new ModArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.HELMET, settings
+                    .maxDamage(EquipmentType.HELMET.getMaxDamage(25))));
 
     public static final Item HELGERITE_CHESTPLATE = registerItem("helgerite_chestplate",
-            settings -> new Item(settings.armor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.CHESTPLATE)));
+            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.CHESTPLATE, settings
+                    .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(25))));
 
     public static final Item HELGERITE_LEGGINGS = registerItem("helgerite_leggings",
-            settings -> new Item(settings.armor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.LEGGINGS)));
+            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.LEGGINGS, settings
+                    .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(25))));
 
     public static final Item HELGERITE_BOOTS = registerItem("helgerite_boots",
-            settings -> new Item(settings.armor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.BOOTS)));
+            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings
+                    .maxDamage(EquipmentType.BOOTS.getMaxDamage(25))));
 
     public static final Item HELGERITE_SPAWN_EGG = registerItem("helgerite_spawn_egg",
             settings -> new SpawnEggItem(ModEntities.HELGERITE, settings));
