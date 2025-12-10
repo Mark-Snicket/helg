@@ -8,7 +8,8 @@
         "Mark Snicket"
     ],
     "contact": {
-        "homepage": "https://modrinth.com/mod/helg/"
+        "homepage": "https://modrinth.com/mod/helg/",
+        "sources": "https://github.com/Mark-Snicket/helg/"
     },
     "license": "MIT",
     "icon": "assets/helg/icon.png",
