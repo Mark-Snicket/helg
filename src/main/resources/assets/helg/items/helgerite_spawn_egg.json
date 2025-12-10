@@ -1,6 +1,16 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "helg:item/helgerite_spawn_egg"
+    "model": "helg:item/helgerite_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -3034997
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -14408998
+      }
+    ]
   }
 }
