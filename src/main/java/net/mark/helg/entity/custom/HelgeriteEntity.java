@@ -5,6 +5,8 @@ import net.mark.helg.entity.custom.goal.ArmorTemptGoal;
 import net.mark.helg.item.ModArmorMaterials;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
@@ -13,16 +15,19 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Predicate;
 
 
 public class HelgeriteEntity extends AnimalEntity {
@@ -40,10 +45,10 @@ public class HelgeriteEntity extends AnimalEntity {
         this.goalSelector.add(0, new FlyGoal(this, 3.0d));
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        // this.goalSelector.add(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELGERITE_ARMOR_MATERIAL));
+        //this.goalSelector.add(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELG_ARMOR_MATERIAL, false));
         this.goalSelector.add(2, new TemptGoal(this, 1.33d, Ingredient.ofItems(ModBlocks.HELG_BLOCK), false));
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0d));
-        //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         //this.goalSelector.add(5, new LookAroundGoal(this));
 
     }
@@ -53,16 +58,16 @@ public class HelgeriteEntity extends AnimalEntity {
         BirdNavigation birdNavigation = new BirdNavigation(this, world);
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(true);
+        birdNavigation.setCanEnterOpenDoors(true);
         return birdNavigation;
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 10)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.2)
-                .add(EntityAttributes.FLYING_SPEED, 0.33)
-                .add(EntityAttributes.SAFE_FALL_DISTANCE, 9999.0)
-                .add(EntityAttributes.TEMPT_RANGE, 16);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.33)
+                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 9999.0);
     }
 
     private void setupAnimationStates() {

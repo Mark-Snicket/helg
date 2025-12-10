@@ -4,11 +4,20 @@
   "cookingtime": 100,
   "experience": 0.1,
   "ingredient": [
-    "helg:helg_ore",
-    "helg:helgerite_helmet",
-    "helg:helgerite_chestplate",
-    "helg:helgerite_leggings",
-    "helg:helgerite_boots"
+        {
+      "item": "helg:helg_ore"
+    },{
+      "item": "helg:helgerite_helmet"
+    },
+    {
+      "item": "helg:helgerite_chestplate"
+    },
+    {
+      "item": "helg:helgerite_leggings"
+    },
+    {
+      "item": "helg:helgerite_boots"
+    }
   ],
   "result": {
     "id": "helg:helg_shard"

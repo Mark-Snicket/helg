@@ -8,46 +8,42 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-
-import java.util.function.Function;
 
 public class ModItems {
 
-    public static final Item HELG_SHARD = registerItem("helg_shard", Item::new);
-    public static final Item HELG_INGOT = registerItem("helg_ingot", Item::new);
+    public static final Item HELG_SHARD = registerItem("helg_shard", new Item(new Item.Settings()));
+    public static final Item HELG_INGOT = registerItem("helg_ingot", new Item(new Item.Settings()));
 
 
     public static final Item HELGERITE_HELMET = registerItem("helgerite_helmet",
-            settings -> new ModArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.HELMET, settings
-                    .maxDamage(EquipmentType.HELMET.getMaxDamage(25))));
+            new ModArmorItem(ModArmorMaterials.HELG_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(25))));
 
     public static final Item HELGERITE_CHESTPLATE = registerItem("helgerite_chestplate",
-            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.CHESTPLATE, settings
-                    .maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(25))));
+            new ArmorItem(ModArmorMaterials.HELG_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(25))));
 
     public static final Item HELGERITE_LEGGINGS = registerItem("helgerite_leggings",
-            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.LEGGINGS, settings
-                    .maxDamage(EquipmentType.LEGGINGS.getMaxDamage(25))));
+            new ArmorItem(ModArmorMaterials.HELG_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(25))));
 
     public static final Item HELGERITE_BOOTS = registerItem("helgerite_boots",
-            settings -> new ArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, EquipmentType.BOOTS, settings
-                    .maxDamage(EquipmentType.BOOTS.getMaxDamage(25))));
+            new ArmorItem(ModArmorMaterials.HELG_ARMOR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(25))));
 
     public static final Item HELGERITE_SPAWN_EGG = registerItem("helgerite_spawn_egg",
-            settings -> new SpawnEggItem(ModEntities.HELGERITE,0xd1b08a, 0x2422d9, settings));
+            new SpawnEggItem(ModEntities.HELGERITE,0xd1b08a, 0x2422d9, new Item.Settings()));
 
 
 
-    private static Item registerItem(String name, Function<Item.Settings, Item> function) {
-        return Registry.register(Registries.ITEM, Identifier.of(Helg.MOD_ID, name),
-                function.apply(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Helg.MOD_ID, name)))));
+    private static Item registerItem(String name, Item item) {
+        return Registry.register(Registries.ITEM, Identifier.of(Helg.MOD_ID, name), item);
     }
+
+
 
 
     public static void registerModItems() {

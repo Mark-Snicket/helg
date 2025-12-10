@@ -1,15 +1,14 @@
 package net.mark.helg.entity.custom.goal;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
@@ -18,24 +17,28 @@ import java.util.EnumSet;
 
 public class ArmorTemptGoal extends Goal {
     private static final TargetPredicate TEMPTING_ENTITY_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility();
-    private final TargetPredicate predicate;
+    //private final TargetPredicate predicate;
     protected final PathAwareEntity mob;
     private final double speed;
     private double lastPlayerX;
     private double lastPlayerY;
     private double lastPlayerZ;
+    private double lastPlayerPitch;
+    private double lastPlayerYaw;
     @Nullable
     protected PlayerEntity closestPlayer;
     private int cooldown;
     private boolean active;
-    private final ArmorMaterial material;
+    private final RegistryEntry<ArmorMaterial> material;
+    private final boolean canBeScared;
 
-    public ArmorTemptGoal(PathAwareEntity entity, double speed, ArmorMaterial material) {
+    public ArmorTemptGoal(PathAwareEntity entity, double speed, RegistryEntry<ArmorMaterial> material, boolean canBeScared) {
         this.mob = entity;
         this.speed = speed;
         this.material = material;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
-        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate((TargetPredicate.EntityPredicate) this.closestPlayer);
+        this.canBeScared = canBeScared;
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+        //this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate(this.closestPlayer);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class ArmorTemptGoal extends Goal {
             --this.cooldown;
             return false;
         }
-        this.closestPlayer = this.mob.getWorld().getClosestPlayer(closestPlayer, 16);
+        //this.closestPlayer = this.mob.getWorld().getClosestPlayer(this.predicate, this.mob);
         return this.closestPlayer != null;
     }
 
@@ -55,11 +58,34 @@ public class ArmorTemptGoal extends Goal {
 
     @Override
     public boolean shouldContinue() {
+        if (this.canBeScared()) {
+            if (this.mob.squaredDistanceTo(this.closestPlayer) < 36.0) {
+                if (this.closestPlayer.squaredDistanceTo(this.lastPlayerX, this.lastPlayerY, this.lastPlayerZ) > 0.010000000000000002) {
+                    return false;
+                }
+                if (Math.abs((double)this.closestPlayer.getPitch() - this.lastPlayerPitch) > 5.0 || Math.abs((double)this.closestPlayer.getYaw() - this.lastPlayerYaw) > 5.0) {
+                    return false;
+                }
+            } else {
+                this.lastPlayerX = this.closestPlayer.getX();
+                this.lastPlayerY = this.closestPlayer.getY();
+                this.lastPlayerZ = this.closestPlayer.getZ();
+            }
+            this.lastPlayerPitch = this.closestPlayer.getPitch();
+            this.lastPlayerYaw = this.closestPlayer.getYaw();
+        }
         return this.canStart();
+    }
+
+    protected boolean canBeScared() {
+        return this.canBeScared;
     }
 
     @Override
     public void start() {
+        this.lastPlayerX = this.closestPlayer.getX();
+        this.lastPlayerY = this.closestPlayer.getY();
+        this.lastPlayerZ = this.closestPlayer.getZ();
         this.active = true;
     }
 
@@ -100,7 +126,7 @@ public class ArmorTemptGoal extends Goal {
                 && !leggings.isEmpty() && !boots.isEmpty();
     }
 
-    private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
+    private boolean hasCorrectArmorOn(RegistryEntry<ArmorMaterial> material, PlayerEntity player) {
         for (ItemStack armorStack: player.getInventory().armor) {
             if(!(armorStack.getItem() instanceof ArmorItem)) {
                 return false;
@@ -112,13 +138,8 @@ public class ArmorTemptGoal extends Goal {
         ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
         ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
 
-        EquippableComponent equippableComponentBoots = boots.getComponents().get(DataComponentTypes.EQUIPPABLE);
-        EquippableComponent equippableComponentLeggings = leggings.getComponents().get(DataComponentTypes.EQUIPPABLE);
-        EquippableComponent equippableComponentBreastplate = breastplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
-        EquippableComponent equippableComponentHelmet = helmet.getComponents().get(DataComponentTypes.EQUIPPABLE);
-
-        return equippableComponentBoots.model().get().equals(material) && equippableComponentLeggings.model().get().equals(material) &&
-                equippableComponentBreastplate.model().get().equals(material) && equippableComponentHelmet.model().get().equals(material);
+        return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
+                leggings.getMaterial() == material && boots.getMaterial() == material;
     }
 
 }

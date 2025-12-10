@@ -3,18 +3,19 @@ package net.mark.helg.entity.client.helgerite;
 import net.mark.helg.Helg;
 import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
+public class HelgeriteModel<T extends HelgeriteEntity> extends SinglePartEntityModel<T> {
     public static final EntityModelLayer HELGERITE = new EntityModelLayer(Identifier.of(Helg.MOD_ID, "helgerite"), "main");
 
     private final ModelPart helgerite;
 
     public HelgeriteModel(ModelPart root) {
-        super(root);
         this.helgerite = root.getChild("helgerite");
     }
 
@@ -35,17 +36,27 @@ public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
         return TexturedModelData.of(modelData, 16, 16);
     }
     @Override
-    public void setAngles(HelgeriteRenderState state) {
-        super.setAngles(state);
-        this.setHeadAngles(state.yawDegrees);
+    public void setAngles(HelgeriteEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.getPart().traverse().forEach(ModelPart::resetTransform);
+        this.setHeadAngles(netHeadYaw);
 
-        this.animateWalking(HelgeriteAnimations.IDLE, state.limbFrequency, state.limbAmplitudeMultiplier, 2.0f, 2.5f);
-        this.animate(state.idleAnimationState, HelgeriteAnimations.IDLE, state.age, 1.0f);
+        this.animateMovement(HelgeriteAnimations.IDLE, limbSwing, limbSwingAmount, 2.0f, 2.5f);
+        this.updateAnimation(entity.idleAnimationState, HelgeriteAnimations.IDLE, ageInTicks, 1.0f);
     }
 
     private void setHeadAngles(float headYaw) {
         headYaw = MathHelper.clamp(headYaw, -30.0f, 30.0f);
 
         this.helgerite.yaw = headYaw * 0.017453292f;
+    }
+
+    @Override
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
+        helgerite.render(matrices, vertexConsumer, light, overlay, color);
+    }
+
+    @Override
+    public ModelPart getPart() {
+        return helgerite;
     }
 }
