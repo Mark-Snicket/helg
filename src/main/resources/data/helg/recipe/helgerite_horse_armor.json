@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "helg:helg_ingot"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    "# #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "helg:helgerite_horse_armor"
+  }
+}

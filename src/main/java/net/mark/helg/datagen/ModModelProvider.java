@@ -8,6 +8,7 @@ import net.mark.helg.item.ModItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
@@ -28,10 +29,10 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        //itemModelGenerator.register(ModItems.HELG_SHARD, Models.GENERATED);
-        //itemModelGenerator.register(ModItems.HELG_INGOT, Models.GENERATED);
+        /*itemModelGenerator.register(ModItems.HELG_SHARD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HELG_INGOT, Models.GENERATED);
 
-        /*itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_HELMET), Identifier.of(Helg.MOD_ID, "helgerite_helmet"),
+        itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_HELMET), Identifier.of(Helg.MOD_ID, "helgerite_helmet"),
                 ModArmorMaterials.HELGERITE, EquipmentSlot.HEAD);
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.HELGERITE_CHESTPLATE), Identifier.of(Helg.MOD_ID, "helgerite_chestplate"),
                 ModArmorMaterials.HELGERITE, EquipmentSlot.CHEST);
@@ -41,6 +42,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModArmorMaterials.HELGERITE, EquipmentSlot.FEET);
 
         itemModelGenerator.register(ModItems.HELGERITE_SPAWN_EGG,
-                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));*/
+                new Model(Optional.of(Identifier.of("item/template_spawn_egg")), Optional.empty()));
+
+        itemModelGenerator.register(ModItems.HELGERITE_HORSE_ARMOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HELG_HORSE_ARMOR, Models.GENERATED);*/
     }
 }

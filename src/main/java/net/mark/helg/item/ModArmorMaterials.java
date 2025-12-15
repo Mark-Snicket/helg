@@ -16,13 +16,19 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
-    public static final RegistryEntry<ArmorMaterial> HELG_ARMOR_MATERIAL = registerArmorMaterial("helg",
+    public static final RegistryEntry<ArmorMaterial> HELGERITE_ARMOR_MATERIAL = registerArmorMaterial("helgerite",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 2);
                 map.put(ArmorItem.Type.LEGGINGS, 5);
                 map.put(ArmorItem.Type.CHESTPLATE, 7);
                 map.put(ArmorItem.Type.HELMET, 3);
-                map.put(ArmorItem.Type.BODY, 10);
+                map.put(ArmorItem.Type.BODY, 13);
+            }), 15, SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA, () -> Ingredient.ofItems(ModItems.HELG_INGOT),
+                    List.of(new ArmorMaterial.Layer(Identifier.of(Helg.MOD_ID, "helg"))), 1.0f, 0.0f));
+
+    public static final RegistryEntry<ArmorMaterial> HELG_ARMOR_MATERIAL = registerArmorMaterial("helg",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BODY, 13);
             }), 15, SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA, () -> Ingredient.ofItems(ModItems.HELG_INGOT),
                     List.of(new ArmorMaterial.Layer(Identifier.of(Helg.MOD_ID, "helg"))), 1.0f, 0.0f));
 
