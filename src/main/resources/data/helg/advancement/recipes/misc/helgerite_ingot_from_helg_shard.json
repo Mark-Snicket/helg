@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "helg:helg_ingot_from_helg_shard"
+        "recipe": "helg:helgerite_ingot_from_helg_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "helg:helg_ingot_from_helg_shard"
+      "helg:helgerite_ingot_from_helg_shard"
     ]
   }
 }

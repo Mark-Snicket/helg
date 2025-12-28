@@ -1,5 +1,10 @@
 {
   "layers": {
+    "horse_body": [
+      {
+        "texture": "helg:helgerite"
+      }
+    ],
     "humanoid": [
       {
         "texture": "helg:helgerite"

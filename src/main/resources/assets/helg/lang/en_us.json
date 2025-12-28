@@ -1,17 +1,28 @@
 {
-  "item.helg.helg_shard": "Helg Shard",
-  "item.helg.helg_ingot": "Helg Ingot",
+    "item.helg.helg_shard": "Helg Shard",
+    "item.helg.helgerite_ingot": "Helgerite Ingot",
 
-  "item.helg.helgerite_helmet": "Helgerite Helmet",
-  "item.helg.helgerite_chestplate": "Helgerite Chestplate",
-  "item.helg.helgerite_leggings": "Helgerite Leggings",
-  "item.helg.helgerite_boots": "Helgerite Boots",
+    "block.helg.helg_ore": "Helg Ore",
+    "block.helg.helgerite_block": "Block of Helgerite",
 
-  "item.helg.helgerite_spawn_egg": "Helgerite Spawn Egg",
+    "item.helg.helgerite_helmet": "Helgerite Helmet",
+    "item.helg.helgerite_chestplate": "Helgerite Chestplate",
+    "item.helg.helgerite_leggings": "Helgerite Leggings",
+    "item.helg.helgerite_boots": "Helgerite Boots",
+
+    "item.helg.helg_horse_armor": "Helg Horse Armor",
+    "item.helg.helgerite_horse_armor": "Helgerite Horse Armor",
+
+    "item.helg.helgerite_spawn_egg": "Helgerite Spawn Egg",
+
+    "entity.helg.helgerite": "Helgerite",
+
+    "tag.item.helg.helgerite_armor_repairables": "Helgerite Armor Repairables",
+    "tag.item.helg.helgerite-block_craftables": "Helgerite Block Craftables",
+    "tag.item.helg.helgerite_ingot_craftables": "Helgerite Block Craftables",
 
 
-  "block.helg.helg_ore": "Helg Ore",
-  "block.helg.helg_block": "Block of Helg",
 
-  "entity.helg.helgerite": "Helgerite"
+    "block.helg.helg_block": "Block of Helgerite",
+    "item.helg.helg_ingot": "Helgerite Ingot"
 }
