@@ -23,6 +23,15 @@ public class ModBlocks {
                     .requiresTool()
                     .sounds(BlockSoundGroup.ROOTED_DIRT)));
 
+    public static final Block HELGERITE_BLOCK = registerBlock("helgerite_block",
+            new Block(AbstractBlock.Settings.create()
+                    .strength(5f)
+                    .resistance(5f)
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.GRAVEL)));
+
+
+    /* temp block to handle "changing the id" */
     public static final Block HELG_BLOCK = registerBlock("helg_block",
             new Block(AbstractBlock.Settings.create()
                     .strength(5f)
@@ -50,7 +59,7 @@ public class ModBlocks {
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.add(ModBlocks.HELG_BLOCK);
+            entries.add(ModBlocks.HELGERITE_BLOCK);
         });
     }
 }

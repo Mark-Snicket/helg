@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 public class ModItems {
 
     public static final Item HELG_SHARD = registerItem("helg_shard", new Item(new Item.Settings()));
-    public static final Item HELG_INGOT = registerItem("helg_ingot", new Item(new Item.Settings()));
+    public static final Item HELGERITE_INGOT = registerItem("helgerite_ingot", new Item(new Item.Settings()));
 
 
     public static final Item HELGERITE_HELMET = registerItem("helgerite_helmet",
@@ -39,6 +39,8 @@ public class ModItems {
     public static final Item HELGERITE_HORSE_ARMOR = registerItem("helgerite_horse_armor",
             new AnimalArmorItem(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL, AnimalArmorItem.Type.EQUESTRIAN, false, new Item.Settings().maxCount(1)));
 
+    /* temp block to "handle" changing the id */
+    public static final Item HELG_INGOT = registerItem("helg_ingot", new Item(new Item.Settings()));
 
 
     private static Item registerItem(String name, Item item) {
@@ -51,7 +53,7 @@ public class ModItems {
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(ModItems.HELG_SHARD);
-            entries.add(ModItems.HELG_INGOT);
+            entries.add(ModItems.HELGERITE_INGOT);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {

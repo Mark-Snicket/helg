@@ -16,7 +16,7 @@ public class ModLootTableModifiers {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registry) -> {
 
 
-            if(LootTables.SIMPLE_DUNGEON_CHEST.equals(key)) {
+            if (LootTables.SIMPLE_DUNGEON_CHEST.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.066f))
@@ -68,7 +68,7 @@ public class ModLootTableModifiers {
 
                 tableBuilder.pool(poolBuilder.build());
 
-            }else if (LootTables.VILLAGE_WEAPONSMITH_CHEST.equals(key)) {
+            } else if (LootTables.VILLAGE_WEAPONSMITH_CHEST.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.025f))

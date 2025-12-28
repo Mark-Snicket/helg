@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_helg_block": {
+    "has_helg_shard": {
       "conditions": {
         "items": [
           {
-            "items": "helg:helg_block"
+            "items": "helg:helg_shard"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "helg:helg_ingot_from_block"
+        "recipe": "helg:helgerite_ingot_from_helg_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_helg_block"
+      "has_helg_shard"
     ]
   ],
   "rewards": {
     "recipes": [
-      "helg:helg_ingot_from_block"
+      "helg:helgerite_ingot_from_helg_shard"
     ]
   }
 }

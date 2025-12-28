@@ -1,6 +1,9 @@
 {
   "item.helg.helg_shard": "Helg Shard",
-  "item.helg.helg_ingot": "Helg Ingot",
+  "item.helg.helgerite_ingot": "Helgerite Ingot",
+
+  "block.helg.helg_ore": "Helg Ore",
+  "block.helg.helgerite_block": "Block of Helgerite",
 
   "item.helg.helgerite_helmet": "Helgerite Helmet",
   "item.helg.helgerite_chestplate": "Helgerite Chestplate",
@@ -12,9 +15,14 @@
 
   "item.helg.helgerite_spawn_egg": "Helgerite Spawn Egg",
 
+  "entity.helg.helgerite": "Helgerite",
 
-  "block.helg.helg_ore": "Helg Ore",
-  "block.helg.helg_block": "Block of Helg",
+  "tag.item.helg.helgerite_armor_repairables": "Helgerite Armor Repairables",
+  "tag.item.helg.helgerite_block_craftables": "Helgerite Block Craftables",
+  "tag.item.helg.helgerite_ingot_craftables": "Helgerite Block Craftables",
 
-  "entity.helg.helgerite": "Helgerite"
+
+
+  "block.helg.helg_block": "Block of Helgerite",
+  "item.helg.helg_ingot": "Helgerite Ingot"
 }

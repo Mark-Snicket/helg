@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": {
-      "item": "helg:helg_ingot"
+      "tag": "helg:helgerite_ingot_craftables"
     }
   },
   "pattern": [

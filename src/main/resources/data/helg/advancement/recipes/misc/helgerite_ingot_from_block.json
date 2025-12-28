@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_helgerite_ingot": {
+    "has_helgerite_block": {
       "conditions": {
         "items": [
           {
-            "items": "helg:helgerite_ingot"
+            "items": "helg:helgerite_block"
           }
         ]
       },
@@ -13,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "helg:helgerite_horse_armor"
+        "recipe": "helg:helgerite_ingot_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
-   }
+    }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_helgerite_ingot"
+      "has_helgerite_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "helg:helgerite_horse_armor"
+      "helg:helgerite_ingot_from_block"
     ]
   }
 }

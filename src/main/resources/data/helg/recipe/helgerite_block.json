@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "helg:helg_ingot"
+      "tag": "helg:helgerite_ingot_craftables"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "helg:helg_block"
+    "id": "helg:helgerite_block"
   }
 }
