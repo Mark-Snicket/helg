@@ -5,12 +5,12 @@
         "#": "#helg:helgerite_ingot_craftables"
     },
     "pattern": [
-        "###",
         "# #",
+        "###",
         "# #"
     ],
     "result": {
         "count": 1,
-        "id": "helg:helgerite_leggings"
+        "id": "helg:helgerite_horse_armor"
     }
 }

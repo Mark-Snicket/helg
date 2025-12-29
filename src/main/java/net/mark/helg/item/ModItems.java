@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class ModItems {
 
     public static final Item HELG_SHARD = registerItem("helg_shard", Item::new);
-    public static final Item HELG_INGOT = registerItem("helg_ingot", Item::new);
+    public static final Item HELGERITE_INGOT = registerItem("helgerite_ingot", Item::new);
 
 
     public static final Item HELGERITE_HELMET = registerItem("helgerite_helmet",
@@ -36,6 +36,16 @@ public class ModItems {
     public static final Item HELGERITE_SPAWN_EGG = registerItem("helgerite_spawn_egg",
             settings -> new SpawnEggItem(ModEntities.HELGERITE, settings));
 
+    public static final Item HELG_HORSE_ARMOR = registerItem("helg_horse_armor",
+            settings -> new Item(settings.horseArmor(ModArmorMaterials.HELG_ARMOR_MATERIAL)));
+
+    public static final Item HELGERITE_HORSE_ARMOR = registerItem("helgerite_horse_armor",
+            settings -> new Item(settings.horseArmor(ModArmorMaterials.HELGERITE_ARMOR_MATERIAL)));
+
+
+    /* temp block to "handle" changing the id */
+    public static final Item HELG_INGOT = registerItem("helg_ingot", Item::new);
+
 
 
     private static Item registerItem(String name, Function<Item.Settings, Item> function) {
@@ -47,7 +57,7 @@ public class ModItems {
     public static void registerModItems() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(ModItems.HELG_SHARD);
-            entries.add(ModItems.HELG_INGOT);
+            entries.add(ModItems.HELGERITE_INGOT);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
@@ -55,6 +65,8 @@ public class ModItems {
             entries.add(ModItems.HELGERITE_CHESTPLATE);
             entries.add(ModItems.HELGERITE_LEGGINGS);
             entries.add(ModItems.HELGERITE_BOOTS);
+            entries.add(ModItems.HELG_HORSE_ARMOR);
+            entries.add(ModItems.HELGERITE_HORSE_ARMOR);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
