@@ -8,7 +8,9 @@
     "helg:helgerite_helmet",
     "helg:helgerite_chestplate",
     "helg:helgerite_leggings",
-    "helg:helgerite_boots"
+    "helg:helgerite_boots",
+    "helg:helg_horse_armor",
+    "helg:helgerite_horse_armor"
   ],
   "result": {
     "id": "helg:helg_shard"

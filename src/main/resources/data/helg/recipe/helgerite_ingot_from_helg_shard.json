@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "helg_ingot",
+  "group": "helgerite_ingot",
   "category": "misc",
   "key": {
     "#": "helg:helg_shard",
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "helg:helg_ingot"
+    "id": "helg:helgerite_ingot"
   }
 }

@@ -7,10 +7,10 @@
   "pattern": [
     "# #",
     "###",
-    "###"
+    "# #"
   ],
   "result": {
     "count": 1,
-    "id": "helg:helgerite_chestplate"
+    "id": "helg:helgerite_horse_armor"
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_helg_shard": {
+    "has_helgerite_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "helg:helg_shard"
+            "items": "helg:helgerite_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "helg:helg_ingot_from_helg_shard"
+        "recipe": "helg:helgerite_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_helg_shard"
+      "has_helgerite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "helg:helg_ingot_from_helg_shard"
+      "helg:helgerite_horse_armor"
     ]
   }
 }

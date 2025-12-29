@@ -1,14 +1,19 @@
 {
-  "layers": {
-    "humanoid": [
-      {
-        "texture": "helg:helgerite"
-      }
-    ],
-    "humanoid_leggings": [
-      {
-        "texture": "helg:helgerite"
-      }
-    ]
-  }
+    "layers": {
+        "horse_body": [
+            {
+                "texture": "helg:helgerite"
+            }
+        ],
+        "humanoid": [
+            {
+                "texture": "helg:helgerite"
+            }
+        ],
+        "humanoid_leggings": [
+            {
+                "texture": "helg:helgerite"
+            }
+        ]
+    }
 }
