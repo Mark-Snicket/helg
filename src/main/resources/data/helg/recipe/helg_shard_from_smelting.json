@@ -1,16 +1,18 @@
 {
-  "type": "minecraft:smelting",
-  "category": "misc",
-  "cookingtime": 200,
-  "experience": 0.1,
-  "ingredient": [
-    "helg:helg_ore",
-    "helg:helgerite_helmet",
-    "helg:helgerite_chestplate",
-    "helg:helgerite_leggings",
-    "helg:helgerite_boots"
-  ],
-  "result": {
-    "id": "helg:helg_shard"
-  }
+    "type": "minecraft:smelting",
+    "category": "misc",
+    "cookingtime": 200,
+    "experience": 0.1,
+    "ingredient": [
+        "helg:helg_ore",
+        "helg:helgerite_helmet",
+        "helg:helgerite_chestplate",
+        "helg:helgerite_leggings",
+        "helg:helgerite_boots",
+        "helg:helg_horse_armor",
+        "helg:helgerite_horse_armor"
+    ],
+    "result": {
+        "id": "helg:helg_shard"
+    }
 }

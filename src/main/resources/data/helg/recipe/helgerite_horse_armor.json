@@ -2,15 +2,15 @@
     "type": "minecraft:crafting_shaped",
     "category": "equipment",
     "key": {
-        "#": "helg:helgerite_ingot"
+        "#": "#helg:helgerite_ingot_craftables"
     },
     "pattern": [
-        "###",
         "# #",
+        "###",
         "# #"
     ],
     "result": {
         "count": 1,
-        "id": "helg:helgerite_leggings"
+        "id": "helg:helgerite_horse_armor"
     }
 }

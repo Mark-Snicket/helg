@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "helgerite_ingot",
+    "category": "misc",
+    "ingredients": [
+        "#helg:helgerite_block_craftables"
+    ],
+    "result": {
+        "count": 9,
+        "id": "helg:helgerite_ingot"
+    }
+}

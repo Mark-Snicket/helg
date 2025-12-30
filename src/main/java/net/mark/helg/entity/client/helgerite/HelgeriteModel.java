@@ -1,7 +1,6 @@
 package net.mark.helg.entity.client.helgerite;
 
 import net.mark.helg.Helg;
-import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -40,6 +39,7 @@ public class HelgeriteModel extends EntityModel<HelgeriteRenderState> {
         ModelPartData body = helgerite.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new Dilation(0.075F)), ModelTransform.origin(0.0F, -1.0F, 0.0F));
         return TexturedModelData.of(modelData, 16, 16);
     }
+
     @Override
     public void setAngles(HelgeriteRenderState state) {
         super.setAngles(state);

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "minecraft:model",
-        "model": "helg:block/helgerite_block"
+        "model": "helg:item/helg_horse_armor"
     }
 }
