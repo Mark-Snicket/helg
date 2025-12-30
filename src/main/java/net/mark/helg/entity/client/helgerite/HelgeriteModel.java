@@ -1,7 +1,6 @@
 package net.mark.helg.entity.client.helgerite;
 
 import net.mark.helg.Helg;
-import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;

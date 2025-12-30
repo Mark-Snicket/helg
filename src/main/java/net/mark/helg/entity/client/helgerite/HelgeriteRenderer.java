@@ -2,11 +2,8 @@ package net.mark.helg.entity.client.helgerite;
 
 import net.mark.helg.Helg;
 import net.mark.helg.entity.custom.HelgeriteEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class HelgeriteRenderer extends MobEntityRenderer<HelgeriteEntity, HelgeriteRenderState, HelgeriteModel> {

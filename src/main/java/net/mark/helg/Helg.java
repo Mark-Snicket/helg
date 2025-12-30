@@ -8,6 +8,7 @@ import net.mark.helg.block.ModBlocks;
 import net.mark.helg.entity.ModEntities;
 import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.mark.helg.item.ModItems;
+import net.mark.helg.util.ModLootTableModifiers;
 import net.mark.helg.world.gen.ModWorldGeneration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class Helg implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModWorldGeneration.generateModWorldGen();
 		ModEntities.registerModEntities();
+		ModLootTableModifiers.modifyLootTables();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.HELGERITE, HelgeriteEntity.createAttributes());
 	}

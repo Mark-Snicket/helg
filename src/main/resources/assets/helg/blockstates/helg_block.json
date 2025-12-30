@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "helg:block/helg_block"
+      "model": "helg:block/helgerite_block"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "helg:item/helg_ingot"
+    "layer0": "helg:item/helgerite_ingot"
   }
 }

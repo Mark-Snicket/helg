@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "helg:block/helg_block"
+    "all": "helg:block/helgerite_block"
   }
 }

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "helg:helg_block"
+          "name": "helg:helgerite_block"
         }
       ],
       "rolls": 1.0

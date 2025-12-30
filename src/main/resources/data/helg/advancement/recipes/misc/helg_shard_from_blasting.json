@@ -1,76 +1,98 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_helg_ore": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helg_ore"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_helg_ore": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helg_ore"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helgerite_helmet": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helgerite_helmet"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helgerite_chestplate": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helgerite_chestplate"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helgerite_leggings": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helgerite_leggings"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helgerite_boots": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helgerite_boots"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helg_horse_armor": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helg_horse_armor"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_helgerite_horse_armor": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helgerite_horse_armor"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "helg:helg_shard_from_blasting"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        }
     },
-    "has_helgerite_helmet": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helgerite_helmet"
-          }
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_helg_ore",
+            "has_helgerite_helmet",
+            "has_helgerite_chestplate",
+            "has_helgerite_leggings",
+            "has_helgerite_boots",
+            "has_helg_horse_armor",
+            "has_helgerite_horse_armor"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_helgerite_chestplate": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helgerite_chestplate"
-          }
+    ],
+    "rewards": {
+        "recipes": [
+            "helg:helg_shard_from_blasting"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_helgerite_leggings": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helgerite_leggings"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_helgerite_boots": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helgerite_boots"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "helg:helg_shard_from_blasting"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "has_helg_ore",
-      "has_helgerite_helmet",
-      "has_helgerite_chestplate",
-      "has_helgerite_leggings",
-      "has_helgerite_boots"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "helg:helg_shard_from_blasting"
-    ]
-  }
 }

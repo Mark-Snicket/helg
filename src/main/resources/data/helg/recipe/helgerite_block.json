@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "key": {
+        "#": "#helg:helgerite_ingot_craftables"
+    },
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "result": {
+        "count": 1,
+        "id": "helg:helgerite_block"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "helg:helg_ingot"
+    ],
+    "result": {
+        "count": 1,
+        "id": "helg:helgerite_ingot"
+    }
+}
