@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 public class ModTags {
     public static class Blocks{
-        public static final TagKey<Block> HELGERITE_BLOCK_CRAFTABLES= createTag("helgerite_block_craftables");
+        public static final TagKey<Block> HELGERITE_BLOCK_CRAFTABLES = createTag("helgerite_block_craftables");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(Helg.MOD_ID, name));
@@ -20,7 +20,7 @@ public class ModTags {
 
     public static class Items {
         public static final TagKey<Item> HELGERITE_ARMOR_REPAIRABLES = createTag("helgerite_armor_repairables");
-        public static final TagKey<Item> HELGERITE_INGOT_CRAFTABLES = createTag("helgerite_ingot_craftables.json");
+        public static final TagKey<Item> HELGERITE_INGOT_CRAFTABLES = createTag("helgerite_ingot_craftables");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(Helg.MOD_ID, name));

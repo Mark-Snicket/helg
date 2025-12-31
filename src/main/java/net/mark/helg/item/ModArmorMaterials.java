@@ -29,7 +29,7 @@ public class ModArmorMaterials {
     public static final RegistryEntry<ArmorMaterial> HELG_ARMOR_MATERIAL = registerArmorMaterial("helg",
             () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BODY, 13);
-            }), 15, SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA, () -> Ingredient.ofItems(ModItems.HELGERITE_INGOT),
+            }), 15, SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA, Ingredient::ofItems,
                     List.of(new ArmorMaterial.Layer(Identifier.of(Helg.MOD_ID, "helg"))), 1.0f, 0.0f));
 
 
