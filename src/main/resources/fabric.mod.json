@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "helg",
-    "version": "0.1.2",
+    "version": "${version}",
     "name": "Helg",
     "description": "Adds a new Helg ore type",
     "authors": [
@@ -9,7 +9,8 @@
     ],
     "contact": {
         "homepage": "https://modrinth.com/mod/helg/",
-        "sources": "https://github.com/Mark-Snicket/helg/"
+        "sources": "https://github.com/Mark-Snicket/helg/",
+        "issues": "https://github.com/Mark-Snicket/helg/issues/"
     },
     "license": "MIT",
     "icon": "assets/helg/icon.png",
@@ -20,16 +21,11 @@
         ],
         "client": [
             "net.mark.helg.HelgClient"
-        ],
-        "fabric-datagen": [
-            "net.mark.helg.HelgDataGenerator"
         ]
     },
     "depends": {
         "fabricloader": ">=0.16.14",
         "minecraft": [
-            "1.21.9",
-            "1.21.10",
             "1.21.11"
         ],
         "java": ">=21",

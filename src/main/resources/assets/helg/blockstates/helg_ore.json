@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "helg:block/helg_ore"
+    "variants": {
+        "": {
+            "model": "helg:block/helg_ore"
+        }
     }
-  }
 }

@@ -1,5 +1,6 @@
 {
-  "values": [
-    "helg:helg_block"
-  ]
+    "values": [
+        "helg:helgerite_block",
+        "helg:helg_block"
+    ]
 }

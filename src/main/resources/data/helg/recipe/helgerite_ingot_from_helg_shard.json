@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "helgerite_ingot",
+    "category": "misc",
+    "key": {
+        "#": "helg:helg_shard",
+        "+": "minecraft:lapis_lazuli"
+    },
+    "pattern": [
+        " # ",
+        "#+#",
+        " # "
+    ],
+    "result": {
+        "count": 1,
+        "id": "helg:helgerite_ingot"
+    }
+}

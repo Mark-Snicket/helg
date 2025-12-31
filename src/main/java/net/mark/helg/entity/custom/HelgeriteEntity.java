@@ -1,8 +1,6 @@
 package net.mark.helg.entity.custom;
 
 import net.mark.helg.block.ModBlocks;
-import net.mark.helg.entity.custom.goal.ArmorTemptGoal;
-import net.mark.helg.item.ModArmorMaterials;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -42,7 +40,7 @@ public class HelgeriteEntity extends Animal {
         this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 3.0d));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.25));
         //this.goalSelector.addGoal(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELGERITE_ARMOR_MATERIAL));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.33d, Ingredient.of(ModBlocks.HELG_BLOCK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.33d, Ingredient.of(ModBlocks.HELGERITE_BLOCK, ModBlocks.HELG_BLOCK), false));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0f));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0d));
         //this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));

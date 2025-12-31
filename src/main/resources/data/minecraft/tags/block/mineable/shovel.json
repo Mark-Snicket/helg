@@ -1,7 +1,8 @@
 {
-  "replace": false,
-  "values": [
-    "helg:helg_ore",
-    "helg:helg_block"
-  ]
+    "replace": false,
+    "values": [
+        "helg:helg_ore",
+        "helg:helgerite_block",
+        "helg:helg_block"
+    ]
 }
