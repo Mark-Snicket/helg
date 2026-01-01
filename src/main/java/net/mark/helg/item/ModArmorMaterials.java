@@ -29,5 +29,5 @@ public class ModArmorMaterials {
 
     public static final ArmorMaterial HELG_ARMOR_MATERIAL = new ArmorMaterial(25, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BODY,13);
-    }), 15, SoundEvents.ARMOR_EQUIP_ELYTRA, 1, 0, ModTags.Items.HELGERITE_ARMOR_REPAIRABLES, HELG_KEY);
+    }), 15, SoundEvents.ARMOR_EQUIP_ELYTRA, 1, 0, ModTags.Items.HELG_ARMOR_REPAIRABLES, HELG_KEY);
 }
