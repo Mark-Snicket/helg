@@ -20,6 +20,7 @@ public class ModTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> HELG_ARMOR_REPAIRABLES = createTag("helg_armor_repairables");
         public static final TagKey<Item> HELGERITE_ARMOR_REPAIRABLES = createTag("helgerite_armor_repairables");
         public static final TagKey<Item> HELGERITE_INGOT_CRAFTABLES = createTag("helgerite_ingot_craftables");
 
