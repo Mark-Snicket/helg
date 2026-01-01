@@ -38,7 +38,7 @@ public class HelgeriteEntity extends AnimalEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
         // this.goalSelector.add(2, new ArmorTemptGoal(this, 1.33d, ModArmorMaterials.HELGERITE_ARMOR_MATERIAL));
-        this.goalSelector.add(2, new TemptGoal(this, 1.33d, Ingredient.ofItems(ModBlocks.HELGERITE_BLOCK), false));
+        this.goalSelector.add(2, new TemptGoal(this, 1.33d, Ingredient.ofItems(ModBlocks.HELGERITE_BLOCK, ModBlocks.HELG_BLOCK), false));
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0d));
         //this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
         //this.goalSelector.add(5, new LookAroundGoal(this));

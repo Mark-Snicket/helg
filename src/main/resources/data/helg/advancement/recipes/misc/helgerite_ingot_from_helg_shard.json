@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_helg_shard": {
-      "conditions": {
-        "items": [
-          {
-            "items": "helg:helg_shard"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_helg_shard": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "helg:helg_shard"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "helg:helgerite_ingot_from_helg_shard"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        }
     },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "helg:helgerite_ingot_from_helg_shard"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_helg_shard"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "helg:helgerite_ingot_from_helg_shard"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "has_helg_shard"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "helg:helgerite_ingot_from_helg_shard"
-    ]
-  }
 }

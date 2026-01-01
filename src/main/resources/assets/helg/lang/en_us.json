@@ -10,16 +10,17 @@
     "item.helg.helgerite_leggings": "Helgerite Leggings",
     "item.helg.helgerite_boots": "Helgerite Boots",
 
-    "item.helg.helg_horse_armor": "Helg Horse Armor",
     "item.helg.helgerite_horse_armor": "Helgerite Horse Armor",
+    "item.helg.helg_horse_armor": "Helg Horse Armor",
 
     "item.helg.helgerite_spawn_egg": "Helgerite Spawn Egg",
 
     "entity.helg.helgerite": "Helgerite",
 
+    "tag.item.helg.helg_armor_repairables": "Helg Armor Repairables",
     "tag.item.helg.helgerite_armor_repairables": "Helgerite Armor Repairables",
-    "tag.item.helg.helgerite-block_craftables": "Helgerite Block Craftables",
-    "tag.item.helg.helgerite_ingot_craftables": "Helgerite Block Craftables",
+    "tag.item.helg.helgerite_block_craftables": "Helgerite Block Craftables",
+    "tag.item.helg.helgerite_ingot_craftables": "Helgerite Item Craftables",
 
 
 
