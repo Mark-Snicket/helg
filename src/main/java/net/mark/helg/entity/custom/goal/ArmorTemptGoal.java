@@ -3,6 +3,7 @@ package net.mark.helg.entity.custom.goal;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
@@ -13,11 +14,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
-
-
 public class ArmorTemptGoal extends Goal {
     private static final TargetPredicate TEMPTING_ENTITY_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility();
-    //private final TargetPredicate predicate;
+    private final TargetPredicate predicate;
     protected final PathAwareEntity mob;
     private final double speed;
     private double lastPlayerX;
@@ -38,7 +37,7 @@ public class ArmorTemptGoal extends Goal {
         this.material = material;
         this.canBeScared = canBeScared;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
-        //this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate(this.closestPlayer);
+        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate(this::isTemptedBy);
     }
 
     @Override
@@ -47,13 +46,13 @@ public class ArmorTemptGoal extends Goal {
             --this.cooldown;
             return false;
         }
-        //this.closestPlayer = this.mob.getWorld().getClosestPlayer(this.predicate, this.mob);
+        this.closestPlayer = this.mob.getWorld().getClosestPlayer(this.predicate, this.mob);
         return this.closestPlayer != null;
     }
 
     private boolean isTemptedBy(LivingEntity entity) {
-
-        return hasFullSuitOfArmorOn(this.closestPlayer) && hasCorrectArmorOn(this.material, this.closestPlayer);
+        PlayerEntity player = (PlayerEntity) entity;
+        return hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(player);
     }
 
     @Override
@@ -63,7 +62,7 @@ public class ArmorTemptGoal extends Goal {
                 if (this.closestPlayer.squaredDistanceTo(this.lastPlayerX, this.lastPlayerY, this.lastPlayerZ) > 0.010000000000000002) {
                     return false;
                 }
-                if (Math.abs((double)this.closestPlayer.getPitch() - this.lastPlayerPitch) > 5.0 || Math.abs((double)this.closestPlayer.getYaw() - this.lastPlayerYaw) > 5.0) {
+                if (Math.abs((double) this.closestPlayer.getPitch() - this.lastPlayerPitch) > 5.0 || Math.abs((double) this.closestPlayer.getYaw() - this.lastPlayerYaw) > 5.0) {
                     return false;
                 }
             } else {
@@ -93,7 +92,7 @@ public class ArmorTemptGoal extends Goal {
     public void stop() {
         this.closestPlayer = null;
         this.mob.getNavigation().stop();
-        this.cooldown = net.minecraft.entity.ai.goal.TemptGoal.toGoalTicks(100);
+        this.cooldown = TemptGoal.toGoalTicks(100);
         this.active = false;
     }
 
@@ -107,16 +106,8 @@ public class ArmorTemptGoal extends Goal {
         }
     }
 
-    public boolean isActive() {
-        return this.active;
-    }
 
     private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
-
-        if (player == null) {
-            return false;
-        }
-
         ItemStack boots = player.getInventory().getArmorStack(0);
         ItemStack leggings = player.getInventory().getArmorStack(1);
         ItemStack breastplate = player.getInventory().getArmorStack(2);
@@ -126,17 +117,12 @@ public class ArmorTemptGoal extends Goal {
                 && !leggings.isEmpty() && !boots.isEmpty();
     }
 
-    private boolean hasCorrectArmorOn(RegistryEntry<ArmorMaterial> material, PlayerEntity player) {
-        for (ItemStack armorStack: player.getInventory().armor) {
-            if(!(armorStack.getItem() instanceof ArmorItem)) {
-                return false;
-            }
-        }
+    private boolean hasCorrectArmorOn(PlayerEntity player) {
 
-        ArmorItem boots = ((ArmorItem)player.getInventory().getArmorStack(0).getItem());
-        ArmorItem leggings = ((ArmorItem)player.getInventory().getArmorStack(1).getItem());
-        ArmorItem breastplate = ((ArmorItem)player.getInventory().getArmorStack(2).getItem());
-        ArmorItem helmet = ((ArmorItem)player.getInventory().getArmorStack(3).getItem());
+        ArmorItem boots = ((ArmorItem) player.getInventory().getArmorStack(0).getItem());
+        ArmorItem leggings = ((ArmorItem) player.getInventory().getArmorStack(1).getItem());
+        ArmorItem breastplate = ((ArmorItem) player.getInventory().getArmorStack(2).getItem());
+        ArmorItem helmet = ((ArmorItem) player.getInventory().getArmorStack(3).getItem());
 
         return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
                 leggings.getMaterial() == material && boots.getMaterial() == material;
