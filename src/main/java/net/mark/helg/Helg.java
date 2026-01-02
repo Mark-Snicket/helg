@@ -25,6 +25,6 @@ public class Helg implements ModInitializer {
 		ModEntities.registerModEntities();
 		ModLootTableModifiers.modifyLootTables();
 
-		FabricDefaultAttributeRegistry.register(ModEntities.HELGERITE, HelgeriteEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.HELGERITE, HelgeriteEntity.createHelgeriteAttributes());
 	}
 }
