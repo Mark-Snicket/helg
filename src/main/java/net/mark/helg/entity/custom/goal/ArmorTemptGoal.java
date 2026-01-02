@@ -27,7 +27,6 @@ public class ArmorTemptGoal extends Goal {
     @Nullable
     protected PlayerEntity closestPlayer;
     private int cooldown;
-    private boolean active;
     private final RegistryEntry<ArmorMaterial> material;
     private final boolean canBeScared;
 
@@ -85,7 +84,6 @@ public class ArmorTemptGoal extends Goal {
         this.lastPlayerX = this.closestPlayer.getX();
         this.lastPlayerY = this.closestPlayer.getY();
         this.lastPlayerZ = this.closestPlayer.getZ();
-        this.active = true;
     }
 
     @Override
@@ -93,7 +91,6 @@ public class ArmorTemptGoal extends Goal {
         this.closestPlayer = null;
         this.mob.getNavigation().stop();
         this.cooldown = TemptGoal.toGoalTicks(100);
-        this.active = false;
     }
 
     @Override
