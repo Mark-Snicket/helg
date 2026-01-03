@@ -2,40 +2,41 @@ package net.mark.helg.entity.custom.goal;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.equipment.ArmorMaterial;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
-
-
 public class ArmorTemptGoal extends Goal {
-    private static final TargetPredicate TEMPTING_ENTITY_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility();
+    private static final TargetPredicate TEMPTING_ENTITY_PREDICATE = TargetPredicate.createNonAttackable().ignoreVisibility();
     private final TargetPredicate predicate;
-    protected final PathAwareEntity mob;
-    private final double speed;
+    protected final MobEntity mob;
+    protected final double speed;
     private double lastPlayerX;
     private double lastPlayerY;
     private double lastPlayerZ;
+    private double lastPlayerPitch;
+    private double lastPlayerYaw;
     @Nullable
     protected PlayerEntity closestPlayer;
     private int cooldown;
-    private boolean active;
     private final ArmorMaterial material;
+    private final boolean canBeScared;
 
-    public ArmorTemptGoal(PathAwareEntity entity, double speed, ArmorMaterial material) {
+    public ArmorTemptGoal(MobEntity entity, double speed, ArmorMaterial material, boolean canBeScared) {
         this.mob = entity;
         this.speed = speed;
         this.material = material;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
-        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate((TargetPredicate.EntityPredicate) this.closestPlayer);
+        this.canBeScared = canBeScared;
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+        this.predicate = TEMPTING_ENTITY_PREDICATE.copy().setPredicate((entityX, world) -> this.isTemptedBy(entityX));
     }
 
     @Override
@@ -43,77 +44,100 @@ public class ArmorTemptGoal extends Goal {
         if (this.cooldown > 0) {
             --this.cooldown;
             return false;
+        } else {
+            this.closestPlayer = getServerWorld(this.mob).getClosestPlayer(this.predicate.setBaseMaxDistance(this.mob.getAttributeValue(EntityAttributes.TEMPT_RANGE)), this.mob);
+            return this.closestPlayer != null;
         }
-        //this.closestPlayer = this.mob.getWorld().getClosestPlayer(closestPlayer, 16);
-        return this.closestPlayer != null;
     }
 
     private boolean isTemptedBy(LivingEntity entity) {
+        PlayerEntity player = (PlayerEntity) entity;
 
-        return hasFullSuitOfArmorOn(this.closestPlayer) && hasCorrectArmorOn(this.material, this.closestPlayer);
+        return hasFullSuitOfArmorOn(player) && hasCorrectArmorOn(player);
     }
 
     @Override
     public boolean shouldContinue() {
+        if (this.canBeScared()) {
+            if (this.mob.squaredDistanceTo(this.closestPlayer) < (double) 36.0F) {
+                if (this.closestPlayer.squaredDistanceTo(this.lastPlayerX, this.lastPlayerY, this.lastPlayerZ) > 0.010000000000000002) {
+                    return false;
+                }
+
+                if (Math.abs((double) this.closestPlayer.getPitch() - this.lastPlayerPitch) > (double) 5.0F || Math.abs((double) this.closestPlayer.getYaw() - this.lastPlayerYaw) > (double) 5.0F) {
+                    return false;
+                }
+            } else {
+                this.lastPlayerX = this.closestPlayer.getX();
+                this.lastPlayerY = this.closestPlayer.getY();
+                this.lastPlayerZ = this.closestPlayer.getZ();
+            }
+
+            this.lastPlayerPitch = (double) this.closestPlayer.getPitch();
+            this.lastPlayerYaw = (double) this.closestPlayer.getYaw();
+        }
+
         return this.canStart();
+    }
+
+    protected boolean canBeScared() {
+        return this.canBeScared;
     }
 
     @Override
     public void start() {
-        this.active = true;
+        this.lastPlayerX = this.closestPlayer.getX();
+        this.lastPlayerY = this.closestPlayer.getY();
+        this.lastPlayerZ = this.closestPlayer.getZ();
     }
 
     @Override
     public void stop() {
         this.closestPlayer = null;
-        this.mob.getNavigation().stop();
-        this.cooldown = Goal.toGoalTicks(100);
-        this.active = false;
+        this.stopMoving();
+        this.cooldown = toGoalTicks(100);
     }
 
-    @Override
     public void tick() {
-        this.mob.getLookControl().lookAt(this.closestPlayer, this.mob.getMaxHeadRotation() + 20, this.mob.getMaxLookPitchChange());
+        this.mob.getLookControl().lookAt(this.closestPlayer, (float) (this.mob.getMaxHeadRotation() + 20), (float) this.mob.getMaxLookPitchChange());
         if (this.mob.squaredDistanceTo(this.closestPlayer) < 6.25) {
-            this.mob.getNavigation().stop();
+            this.stopMoving();
         } else {
-            this.mob.getNavigation().startMovingTo(this.closestPlayer, this.speed);
+            this.startMovingTo(this.closestPlayer);
         }
+
     }
 
-    public boolean isActive() {
-        return this.active;
+    protected void stopMoving() {
+        this.mob.getNavigation().stop();
+    }
+
+    protected void startMovingTo(PlayerEntity player) {
+        this.mob.getNavigation().startMovingTo(player, this.speed);
     }
 
     private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
+        ItemStack boots = player.getInventory().getStack(36);
+        ItemStack leggings = player.getInventory().getStack(37);
+        ItemStack chestplate = player.getInventory().getStack(38);
+        ItemStack helmet = player.getInventory().getStack(39);
 
-        if (player == null) {
-            return false;
-        }
-
-        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
-
-        return !helmet.isEmpty() && !chestplate.isEmpty()
-                && !leggings.isEmpty() && !boots.isEmpty();
+        return !helmet.isEmpty() && !chestplate.isEmpty() && !leggings.isEmpty() && !boots.isEmpty();
     }
 
-    private boolean hasCorrectArmorOn(ArmorMaterial material, PlayerEntity player) {
-
-        ItemStack boots = player.getInventory().getStack(EquipmentSlot.FEET.getIndex());
-        ItemStack leggings = player.getInventory().getStack(EquipmentSlot.LEGS.getIndex());
-        ItemStack chestplate = player.getInventory().getStack(EquipmentSlot.CHEST.getIndex());
-        ItemStack helmet = player.getInventory().getStack(EquipmentSlot.HEAD.getIndex());
+    private boolean hasCorrectArmorOn(PlayerEntity player) {
+        ItemStack boots = player.getInventory().getStack(36);
+        ItemStack leggings = player.getInventory().getStack(37);
+        ItemStack chestplate = player.getInventory().getStack(38);
+        ItemStack helmet = player.getInventory().getStack(39);
 
         EquippableComponent equippableComponentBoots = boots.getComponents().get(DataComponentTypes.EQUIPPABLE);
         EquippableComponent equippableComponentLeggings = leggings.getComponents().get(DataComponentTypes.EQUIPPABLE);
-        EquippableComponent equippableComponentBreastplate = chestplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
+        EquippableComponent equippableComponentChestplate = chestplate.getComponents().get(DataComponentTypes.EQUIPPABLE);
         EquippableComponent equippableComponentHelmet = helmet.getComponents().get(DataComponentTypes.EQUIPPABLE);
 
-        return equippableComponentBoots.assetId().get().equals(material) && equippableComponentLeggings.assetId().get().equals(material) &&
-                equippableComponentBreastplate.assetId().get().equals(material) && equippableComponentHelmet.assetId().get().equals(material);
+        return equippableComponentBoots.assetId().get().equals(this.material.assetId()) && equippableComponentLeggings.assetId().get().equals(this.material.assetId()) &&
+                equippableComponentChestplate.assetId().get().equals(this.material.assetId()) && equippableComponentHelmet.assetId().get().equals(this.material.assetId());
     }
 
 }
