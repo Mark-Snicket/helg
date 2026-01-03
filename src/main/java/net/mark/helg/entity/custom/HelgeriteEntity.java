@@ -64,7 +64,8 @@ public class HelgeriteEntity extends AnimalEntity {
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.2)
                 .add(EntityAttributes.FLYING_SPEED, 0.33)
                 .add(EntityAttributes.FALL_DAMAGE_MULTIPLIER, 0.0f)
-                .add(EntityAttributes.GRAVITY, 0.0f);
+                .add(EntityAttributes.GRAVITY, 0.0f)
+                .add(EntityAttributes.TEMPT_RANGE, 10.0);
     }
 
     private void setupAnimationStates() {
