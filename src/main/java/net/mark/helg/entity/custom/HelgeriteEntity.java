@@ -1,6 +1,5 @@
 package net.mark.helg.entity.custom;
 
-import net.mark.helg.block.ModBlocks;
 import net.mark.helg.entity.custom.goal.ArmorTemptGoal;
 import net.mark.helg.item.ModArmorMaterials;
 import net.minecraft.entity.AnimationState;
@@ -12,12 +11,10 @@ import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -61,7 +58,8 @@ public class HelgeriteEntity extends AnimalEntity {
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.2)
                 .add(EntityAttributes.FLYING_SPEED, 0.33)
                 .add(EntityAttributes.FALL_DAMAGE_MULTIPLIER, 0.0f)
-                .add(EntityAttributes.GRAVITY, 0.0f);
+                .add(EntityAttributes.GRAVITY, 0.0f)
+                .add(EntityAttributes.TEMPT_RANGE, 10.0);
     }
 
     private void setupAnimationStates() {
