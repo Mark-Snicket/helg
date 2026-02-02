@@ -5,6 +5,7 @@ import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
 public class HelgeriteRenderer extends MobRenderer<HelgeriteEntity, HelgeriteRenderState, HelgeriteModel> {
     public HelgeriteRenderer(EntityRendererProvider.Context context) {
@@ -12,7 +13,7 @@ public class HelgeriteRenderer extends MobRenderer<HelgeriteEntity, HelgeriteRen
     }
 
     @Override
-    public Identifier getTextureLocation(HelgeriteRenderState state) {
+    public @NonNull Identifier getTextureLocation(HelgeriteRenderState state) {
         return Identifier.fromNamespaceAndPath(Helg.MOD_ID, "textures/entity/helgerite/helgerite.png");
     }
 

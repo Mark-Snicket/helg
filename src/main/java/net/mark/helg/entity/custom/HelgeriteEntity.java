@@ -2,7 +2,6 @@ package net.mark.helg.entity.custom;
 
 import net.mark.helg.entity.custom.goal.ArmorTemptGoal;
 import net.mark.helg.item.ModArmorMaterials;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,13 +17,15 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 
-public class HelgeriteEntity extends Animal {
+public class HelgeriteEntity extends Animal implements FlyingAnimal {
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationCooldown = 0;
@@ -47,12 +48,8 @@ public class HelgeriteEntity extends Animal {
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
-        FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level) {
-            public boolean isValidPosition(BlockPos pos) {
-                return !this.level.getBlockState(pos.below()).isAir();
-            }
-        };
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
+        FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level);
         flyingPathNavigation.setCanOpenDoors(false);
         flyingPathNavigation.setCanFloat(true);
         flyingPathNavigation.setRequiredPathLength(48.0F);
@@ -70,11 +67,11 @@ public class HelgeriteEntity extends Animal {
     }
 
     private void setupAnimationStates() {
-        if (this.idleAnimationCooldown <= 0) {
+        if (this.idleAnimationCooldown <= 0 && this.isFlying()) {
             this.idleAnimationCooldown = 240;
             this.idleAnimationState.start(this.age);
         } else {
-            --this.idleAnimationCooldown;
+            this.idleAnimationCooldown--;
         }
     }
 
@@ -91,12 +88,12 @@ public class HelgeriteEntity extends Animal {
     }
 
     @Override
-    public boolean isFood(ItemStack stack) {
+    public boolean isFood(@NonNull ItemStack stack) {
         return false;
     }
 
     @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+    public @Nullable AgeableMob getBreedOffspring(@NonNull ServerLevel serverLevel, @NonNull AgeableMob ageableMob) {
         return null;
     }
 
@@ -106,13 +103,19 @@ public class HelgeriteEntity extends Animal {
     }
 
     @Override
-    protected @Nullable SoundEvent getHurtSound(DamageSource source) {
+    protected @Nullable SoundEvent getHurtSound(@NonNull DamageSource source) {
         return SoundEvents.RAVAGER_STEP;
     }
 
     @Override
     protected @Nullable SoundEvent getDeathSound() {
         return SoundEvents.GOAT_HORN_BREAK;
+    }
+
+
+    @Override
+    public boolean isFlying() {
+        return !this.onGround();
     }
 
 
