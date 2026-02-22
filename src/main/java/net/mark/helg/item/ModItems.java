@@ -1,6 +1,6 @@
 package net.mark.helg.item;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.mark.helg.Helg;
 import net.mark.helg.entity.ModEntities;
 import net.minecraft.core.Registry;
@@ -55,12 +55,12 @@ public class ModItems {
 
 
     public static void registerModItems() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             entries.accept(ModItems.HELG_SHARD);
             entries.accept(ModItems.HELGERITE_INGOT);
         });
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(entries -> {
             entries.accept(ModItems.HELGERITE_HELMET);
             entries.accept(ModItems.HELGERITE_CHESTPLATE);
             entries.accept(ModItems.HELGERITE_LEGGINGS);
@@ -69,7 +69,7 @@ public class ModItems {
             entries.accept(ModItems.HELGERITE_HORSE_ARMOR);
         });
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.accept(ModItems.HELGERITE_SPAWN_EGG);
         });
     }

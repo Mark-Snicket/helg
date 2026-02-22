@@ -19,24 +19,24 @@ public class ModLootTableModifiers {
             if (BuiltInLootTables.SIMPLE_DUNGEON.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.066f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.066f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
             } else if (BuiltInLootTables.DESERT_PYRAMID.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.055f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.055f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
             } else if (BuiltInLootTables.END_CITY_TREASURE.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.045f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.045f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -44,8 +44,8 @@ public class ModLootTableModifiers {
             } else if (BuiltInLootTables.JUNGLE_TEMPLE.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.045f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.045f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -53,8 +53,8 @@ public class ModLootTableModifiers {
             } else if (BuiltInLootTables.NETHER_BRIDGE.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.099f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.099f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -62,8 +62,8 @@ public class ModLootTableModifiers {
             } else if (BuiltInLootTables.STRONGHOLD_CORRIDOR.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.025f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.025f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
@@ -71,8 +71,8 @@ public class ModLootTableModifiers {
             } else if (BuiltInLootTables.VILLAGE_WEAPONSMITH.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
-                        .conditionally(LootItemRandomChanceCondition.randomChance(0.025f).build())
-                        .with(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
+                        .when(LootItemRandomChanceCondition.randomChance(0.025f).build())
+                        .add(LootItem.lootTableItem(ModItems.HELG_HORSE_ARMOR).build())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)).build());
 
                 tableBuilder.pool(poolBuilder.build());
