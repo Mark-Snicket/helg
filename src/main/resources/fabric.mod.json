@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "helg",
-    "version": "${version}",
+    "version": "$version",
     "name": "Helg",
     "description": "Adds a new Helg ore type",
     "authors": [
