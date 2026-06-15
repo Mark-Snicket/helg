@@ -17,7 +17,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
 
-public class HelgeriteEntity extends Animal implements FlyingAnimal {
+public class HelgeriteEntity extends Animal {
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationCooldown = 0;
@@ -113,7 +112,6 @@ public class HelgeriteEntity extends Animal implements FlyingAnimal {
     }
 
 
-    @Override
     public boolean isFlying() {
         return !this.onGround();
     }
