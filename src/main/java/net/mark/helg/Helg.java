@@ -9,19 +9,20 @@ import net.mark.helg.entity.ModEntities;
 import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.mark.helg.item.ModItems;
 import net.mark.helg.util.ModLootTableModifiers;
-import net.mark.helg.world.gen.ModWorldGeneration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.mark.helg.worldgen.gen.ModEntitySpawns;
+import net.mark.helg.worldgen.gen.ModOreGeneration;
 
 public class Helg implements ModInitializer {
 	public static final String MOD_ID = "helg";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
-		ModWorldGeneration.generateModWorldGen();
+
+		ModOreGeneration.generateOres();
+		ModEntitySpawns.addSpawns();
+
 		ModEntities.registerModEntities();
 		ModLootTableModifiers.modifyLootTables();
 
