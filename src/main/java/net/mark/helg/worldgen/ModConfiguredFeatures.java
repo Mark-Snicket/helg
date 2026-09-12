@@ -16,11 +16,6 @@ public class ModConfiguredFeatures {
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 
-        //register(context, HELG_ORE_KEY, Feature.RANDOM,
-        //        FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK,
-        //                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HELG_ORE))));
-
-
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
