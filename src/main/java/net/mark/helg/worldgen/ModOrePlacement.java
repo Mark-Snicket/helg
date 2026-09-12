@@ -1,4 +1,4 @@
-package net.mark.helg.world;
+package net.mark.helg.worldgen;
 
 import net.minecraft.world.level.levelgen.placement.*;
 

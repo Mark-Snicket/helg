@@ -1,4 +1,4 @@
-package net.mark.helg.world.gen;
+package net.mark.helg.worldgen.gen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;

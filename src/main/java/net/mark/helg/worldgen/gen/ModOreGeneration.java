@@ -1,8 +1,8 @@
-package net.mark.helg.world.gen;
+package net.mark.helg.worldgen.gen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.mark.helg.world.ModPlacedFeatures;
+import net.mark.helg.worldgen.ModPlacedFeatures;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
