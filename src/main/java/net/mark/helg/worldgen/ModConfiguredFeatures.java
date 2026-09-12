@@ -1,4 +1,4 @@
-package net.mark.helg.world;
+package net.mark.helg.worldgen;
 
 import net.mark.helg.Helg;
 import net.mark.helg.block.ModBlocks;
