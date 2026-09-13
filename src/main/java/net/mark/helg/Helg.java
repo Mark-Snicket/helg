@@ -8,7 +8,6 @@ import net.mark.helg.entity.custom.HelgeriteEntity;
 import net.mark.helg.item.ModItems;
 import net.mark.helg.util.ModLootTableModifiers;
 import net.mark.helg.worldgen.gen.ModEntitySpawns;
-import net.mark.helg.worldgen.gen.ModOreGeneration;
 
 public class Helg implements ModInitializer {
 	public static final String MOD_ID = "helg";
@@ -18,7 +17,6 @@ public class Helg implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 
-		ModOreGeneration.generateOres();
 		ModEntitySpawns.addSpawns();
 
 		ModEntities.registerModEntities();
