@@ -4,9 +4,7 @@
     "size": 8,
     "targets": [
         {
-            "state": {
-                "Name": "helg:helg_ore"
-            },
+            "state": "helg:helg_ore",
             "target": {
                 "predicate_type": "minecraft:tag_match",
                 "tag": "minecraft:dirt"
