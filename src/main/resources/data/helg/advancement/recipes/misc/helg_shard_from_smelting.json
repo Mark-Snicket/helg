@@ -73,7 +73,7 @@
         },
         "has_the_recipe": {
             "conditions": {
-                "recipe": "helg:helg_shard_from_smelting"
+                "recipes": "helg:helg_shard_from_smelting"
             },
             "trigger": "minecraft:recipe_unlocked"
         }

@@ -13,7 +13,7 @@
         },
         "has_the_recipe": {
             "conditions": {
-                "recipe": "helg:helgerite_helmet"
+                "recipes": "helg:helgerite_helmet"
             },
             "trigger": "minecraft:recipe_unlocked"
         }

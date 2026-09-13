@@ -13,7 +13,7 @@
         },
         "has_the_recipe": {
             "conditions": {
-                "recipe": "helg:helgerite_chestplate"
+                "recipes": "helg:helgerite_chestplate"
             },
             "trigger": "minecraft:recipe_unlocked"
         }
